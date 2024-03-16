@@ -1,14 +1,9 @@
 import React, { useState } from 'react'
 
-interface FormData {
-  name: string
-  lastName: string
-  email: string
-  password: string
-}
+import { UserFormData } from './user-types'
 
 function UsersForm() {
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<UserFormData>({
     name: '',
     lastName: '',
     email: '',
@@ -31,10 +26,10 @@ function UsersForm() {
     }
   }
 
-  const [errors, setErrors] = useState<Partial<FormData>>({})
+  const [errors, setErrors] = useState<Partial<UserFormData>>({})
 
   const validateForm = () => {
-    const errors: Partial<FormData> = {}
+    const errors: Partial<UserFormData> = {}
 
     if (!formData.name.trim()) {
       errors.name = 'El nombre es requerido'
