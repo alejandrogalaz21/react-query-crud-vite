@@ -1,13 +1,24 @@
 import React, { useState } from 'react'
-
 import { UserFormData } from './user-types'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { createUser } from './users-service'
 
 function UsersForm() {
+  const queryClient = useQueryClient()
+
   const [formData, setFormData] = useState<UserFormData>({
     name: '',
     lastName: '',
     email: '',
     password: ''
+  })
+
+  const addUserMutation = useMutation({
+    mutationFn: createUser,
+    onSuccess: () => {
+      // invalidate cache and refetch
+      queryClient.invalidateQueries('users')
+    }
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,7 +33,7 @@ function UsersForm() {
     e.preventDefault()
     if (validateForm()) {
       console.log(formData)
-      // Aquí puedes enviar los datos a tu backend o hacer cualquier otra cosa con ellos
+      addUserMutation.mutate(formData)
     }
   }
 

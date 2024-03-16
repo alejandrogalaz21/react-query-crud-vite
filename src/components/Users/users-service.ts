@@ -7,7 +7,7 @@ export const usersService = axios.create({
 
 export const getUsers = async () => {
   const res = await usersService.get('/')
-  return res.data
+  return res.data.data
 }
 
 export const getUserById = (id: number): Promise<void> =>

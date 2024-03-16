@@ -11,7 +11,7 @@ interface UserTableProps {
   users: User[]
 }
 
-function usersTable({ users }: UserTableProps): JSX.Element {
+function UsersTable({ users }: UserTableProps): JSX.Element {
   return (
     <table>
       <thead>
@@ -36,4 +36,4 @@ function usersTable({ users }: UserTableProps): JSX.Element {
   )
 }
 
-export default usersTable
+export default UsersTable
